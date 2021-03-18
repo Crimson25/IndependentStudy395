@@ -3,7 +3,7 @@ public class Sorters {
   
   public void selsort(int[] n) { 
     for(int i = 0; i < n.length; i++) { 
-      for(int j = i+1; j < n.length; j++) { 
+      for(int j = i + 1; j < n.length; j++) { 
          int min = i; 
          if(n[min] > n[j]) { 
            min = j; 
@@ -15,6 +15,19 @@ public class Sorters {
       } 
     } 
 
+  public void bubbleSort(int[] n) {
+    int x = n.length;
+    for (int i = 0; i < x - 1; i++) {
+      for(int j = 0; j < x - i -1; j++) {
+        if (n[j] > n[j+1]) {
+          int temp = n[j];
+          n[j] = n[j+1];
+          n[j+1] = temp;
+        } 
+      }
+    }
+  }
+  
     public void printArray(int[] n) { 
     System.out.print("["); 
     for(int i = 0; i < n.length; i++) { 
@@ -25,7 +38,7 @@ public class Sorters {
     System.out.print(n[i]); 
        } 
       } 
-    System.out.print("]"); 
+    System.out.println("]"); 
     } 
 
      
@@ -36,5 +49,10 @@ public class Sorters {
     ob.selsort(arr); 
     System.out.println("Sortred Array Using Selection Sort:"); 
     ob.printArray(arr); 
+    
+    int[] arr2 = new int[] {62,31,22,99,87,2,14,55,57};
+    ob.bubbleSort(arr2);
+    System.out.println("Sortred Array Using Bubble Sort:"); 
+    ob.printArray(arr2); 
     }     
 }
