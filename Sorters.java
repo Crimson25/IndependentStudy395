@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Sorters {
   
@@ -28,6 +30,34 @@ public class Sorters {
     }
   }
   
+  
+  public void bucketSort(float[] arr, int n) {
+    if(n <= 0)
+      return;
+    
+    ArrayList<Float>[] bucket = new ArrayList[n];
+    
+    for(int i = 0; i < n; i++) {
+      bucket[i] = new ArrayList<Float>();
+    }
+    for (int i = 0; i < n; i++) {
+     int bucketIndex = (int) arr[i] * n;
+     bucket[bucketIndex].add(arr[i]);
+    }
+    
+   for (int i = 0; i < n; i++) {
+     Collections.sort((bucket[i]));
+   }
+   
+   int index = 0;
+   for(int i = 0; i < n; i++) {
+     for (int j = 0, size = bucket[i].size(); j < size; j++) {
+       arr[index++] = bucket[i].get(j);
+     }
+   }
+   
+  }
+  
     public void printArray(int[] n) { 
     System.out.print("["); 
     for(int i = 0; i < n.length; i++) { 
@@ -41,6 +71,18 @@ public class Sorters {
     System.out.println("]"); 
     } 
 
+    public void printArray(float[] n) { 
+      System.out.print("["); 
+      for(int i = 0; i < n.length; i++) { 
+        if (i < n.length-1) { 
+          System.out.print(n[i] + ", "); 
+          } 
+      else { 
+      System.out.print(n[i]); 
+         } 
+        } 
+      System.out.println("]"); 
+      } 
      
 
     public static void main(String[]agrs) { 
@@ -54,5 +96,10 @@ public class Sorters {
     ob.bubbleSort(arr2);
     System.out.println("Sortred Array Using Bubble Sort:"); 
     ob.printArray(arr2); 
+    
+    float[] arr3 = {(float) .42, (float) .21, (float) .55, (float) .88, (float) .67, (float) .05, (float) .37};
+    ob.bucketSort(arr3, arr3.length);
+    System.out.println("Sortred Array Using Bucket Sort:");
+    ob.printArray(arr3);
     }     
 }
