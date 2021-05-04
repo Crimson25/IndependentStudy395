@@ -1,3 +1,10 @@
+import random
+import time
+
+l1 = []
+time_tracker = []
+
+
 def bucket_sort(input):
     maxval = max(input)
     size = maxval / len(input)
@@ -32,7 +39,22 @@ def insertion_sort(bucket):
         bucket[j + 1] = var
 
 
-input_list = [1.20, 0.22, 0.43, 0.36, 0.39, 0.27]
-sorted_list = bucket_sort(input_list)
-print('Sorted Using Bucket Sort:')
-print(sorted_list)
+def average(numOfMeans, numOfInst, arrayLength):
+    sum = 0
+    for i in range(arrayLength):
+        rand = random.random()
+        l1.insert(0, rand)
+    for i in range(numOfMeans):
+        start = time.time()
+        for j in range(numOfInst):
+            bucket_sort(l1)
+        end = time.time()
+        time_tracker.insert(0, end - start)
+    for k in range(len(time_tracker)):
+        sum = sum + time_tracker[k]
+    aver = sum / len(time_tracker)
+    print(time_tracker)
+    print('The average time for Bucket Sort: ' + str(aver))
+
+
+average(50, 2000, 20)

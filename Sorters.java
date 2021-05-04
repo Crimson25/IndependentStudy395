@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Sorters {
   
@@ -30,11 +31,11 @@ public class Sorters {
     }
   }
   
-  
   public void bucketSort(float[] arr, int n) {
     if(n <= 0)
       return;
     
+    @SuppressWarnings("unchecked")
     ArrayList<Float>[] bucket = new ArrayList[n];
     
     for(int i = 0; i < n; i++) {
@@ -71,12 +72,18 @@ public class Sorters {
       System.out.println("]"); 
       } 
           
-    public void averageCalcSel() {
-      int[] arr = new int[] {55,32,21,99,87,62,35,2,14};
-      long[] timeTracker = new long[30];
-      for(int j = 0; j < 30; j++) {
+    public void averageCalcSel(int numOfMeans, int numOfInstruc, int arrayLength) {
+      int[] arr = new int[arrayLength];
+      Random rand = new Random();
+      int rand_int = 0;
+      for(int a = 0; a < arr.length; a++) {
+        rand_int = rand.nextInt(101);
+        arr[a] = rand_int;
+      }
+      long[] timeTracker = new long[numOfMeans];
+      for(int j = 0; j < numOfMeans; j++) {
         long startTime = System.nanoTime();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < numOfInstruc; i++) {
           selsort(arr);
         }
       long stopTime = System.nanoTime();
@@ -87,17 +94,23 @@ public class Sorters {
       for (int k = 0; k < timeTracker.length; k++) {
         sum += timeTracker[k];
       }
-      average = (float) (sum / 30.0);
+      average = (float) (sum / timeTracker.length);
       printArray(timeTracker);
       System.out.println("The average time for select sort to run is " + average / 1000000000 + " seconds");
     }
     
-    public void averageCalcBubble() {
-      int[] arr = new int[] {55,32,21,99,87,62,35,2,14};
-      long[] timeTracker = new long[30];
-      for(int j = 0; j < 30; j++) {
+    public void averageCalcBubble(int numOfMeans, int numOfInstruc, int arrayLength) {
+      int[] arr = new int[arrayLength];
+      Random rand = new Random();
+      int rand_int = 0;
+      for(int a = 0; a < arr.length; a++) {
+        rand_int = rand.nextInt(101);
+        arr[a] = rand_int;
+      }
+      long[] timeTracker = new long[numOfMeans];
+      for(int j = 0; j < numOfMeans; j++) {
         long startTime = System.nanoTime();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < numOfInstruc; i++) {
           bubbleSort(arr);
         }
       long stopTime = System.nanoTime();
@@ -108,17 +121,23 @@ public class Sorters {
       for (int k = 0; k < timeTracker.length; k++) {
         sum += timeTracker[k];
       }
-      average = (float) (sum / 30.0);
+      average = (float) (sum / timeTracker.length);
       printArray(timeTracker);
       System.out.println("The average time for bubble sort to run is " + average / 1000000000 + " seconds");
     }
     
-    public void averageCalcBucket() {
-      float[] arr3 = {(float) .42, (float) .21, (float) .55, (float) .88, (float) .67, (float) .05, (float) .37};
-      long[] timeTracker = new long[30];
-      for(int j = 0; j < 30; j++) {
+    public void averageCalcBucket(int numOfMeans, int numOfInstruc, int arrayLength) {
+      float[] arr3 = new float[arrayLength];
+      Random rand = new Random();
+      double rand_dub = 0;
+      for(int a = 0; a < arr3.length; a++) {
+        rand_dub = rand.nextDouble();
+        arr3[a] = (float) rand_dub;
+      }
+      long[] timeTracker = new long[numOfMeans];
+      for(int j = 0; j < numOfMeans; j++) {
         long startTime = System.nanoTime();
-        for(int i = 0; i < 1000; i++) {
+        for(int i = 0; i < numOfInstruc; i++) {
           bucketSort(arr3, arr3.length);
         }
       long stopTime = System.nanoTime();
@@ -129,15 +148,15 @@ public class Sorters {
       for (int k = 0; k < timeTracker.length; k++) {
         sum += timeTracker[k];
       }
-      average = (float) (sum / 30.0);
+      average = (float) (sum / timeTracker.length);
       printArray(timeTracker);
       System.out.println("The average time for bucket sort to run is " + average / 1000000000 + " seconds");
     }
 
     public static void main(String[]agrs) { 
     Sorters ob = new Sorters(); 
-    ob.averageCalcSel();
-    ob.averageCalcBubble();
-    ob.averageCalcBucket();
+    ob.averageCalcSel(50,2500,20);
+    ob.averageCalcBubble(50,2500,20);
+    ob.averageCalcBucket(50,2500,20);
     }     
 }

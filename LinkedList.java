@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class LinkedList {
   
@@ -30,6 +31,19 @@ public class LinkedList {
     return list;
   }
   
+  
+  public void printArray(long[] n) { 
+    System.out.print("["); 
+    for(int i = 0; i < n.length; i++) { 
+      if (i < n.length-1) { 
+        System.out.print(n[i] + ", "); 
+        } 
+    else { 
+    System.out.print(n[i]); 
+       } 
+      } 
+    System.out.println("]"); 
+    } 
   
   public static void printList(LinkedList l) {
     Node current = l.head;
@@ -65,23 +79,51 @@ public class LinkedList {
     }
     return list;
   }
+  
+  public void averageTimeInsert(int numOfMeans, int numOfInstruc, LinkedList list) {
+    long[] timeTracker = new long[numOfMeans];
+    for(int j = 0; j < numOfMeans; j++) {
+      long startTime = System.nanoTime();
+      for(int i = 0; i < numOfInstruc; i++) {
+        list = insert(list,i);
+      }
+    long stopTime = System.nanoTime();
+    timeTracker[j] = stopTime - startTime; 
+    }
+    long sum = 0;
+    float average = 0;
+    for (int k = 0; k < timeTracker.length; k++) {
+      sum += timeTracker[k];
+    }
+    average = (float) (sum / timeTracker.length);
+    printArray(timeTracker);
+    System.out.println("The average time for insert in the linked list to run is " + average / 1000000000 + " seconds");
+  }
+  
+  public void averageTimeRemove(int numOfMeans, int numOfInstruc, LinkedList list) {
+    long[] timeTracker = new long[numOfMeans];
+    for(int j = 0; j < numOfMeans; j++) {
+      long startTime = System.nanoTime();
+      for(int i = 0; i < numOfInstruc; i++) {
+        list = remove(list,i);
+      }
+    long stopTime = System.nanoTime();
+    timeTracker[j] = stopTime - startTime; 
+    }
+    long sum = 0;
+    float average = 0;
+    for (int k = 0; k < timeTracker.length; k++) {
+      sum += timeTracker[k];
+    }
+    average = (float) (sum / timeTracker.length);
+    printArray(timeTracker);
+    System.out.println("The average time for remove in the linked list to run is " + average / 1000000000 + " seconds");
+  }
 
 
 public static void main(String[] args) {
-    LinkedList list = new LinkedList();
-    list = insert(list,1);
-    list = insert(list, 2);
-    list = insert(list, 3);
-    list = insert(list, 4);
-    list = insert(list, 5);
-    list = insert(list, 6);
-    list = insert(list, 7);
-    list = insert(list, 8);
-    
-    printList(list);
-    
-    list = remove(list, 3);
-    
-    printList(list);
+  LinkedList ll = new LinkedList();
+    ll.averageTimeInsert(50, 2000, ll);
+    ll.averageTimeRemove(50, 2000, ll);
   }
 }
